@@ -1,7 +1,8 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom';
 
 import Todos from './components/Todos';
@@ -12,12 +13,17 @@ import 'todomvc-app-css/index.css';
 
 
 const App = () => (
-  <Router>
-    <div>
-      <Route exact path="/" component={Todos} />
-      <Route exact path="/:filter" component={Todos} />
-    </div>
-  </Router>
+  <div>
+    <Router>
+      <Route exact path="/" render={() => <Redirect to="/react-rxjs-todos/" />} />
+    </Router>
+    <Router basename="/react-rxjs-todos/">
+      <div>
+        <Route exact path="/" component={Todos} />
+        <Route exact path="/:filter" component={Todos} />
+      </div>
+    </Router>
+  </div>
 );
 
 export default App;
